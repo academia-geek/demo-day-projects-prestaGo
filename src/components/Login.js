@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Boton,Facebook, Formulario, Google, Label, Redes, Titulo, Wrapper } from '../styles/loginStyled'
+import { Boton,Facebook, Formulario, Google, Label, Redes, Subtitulo, Titulo, Wrapper } from '../styles/loginStyled'
 export const Login = () => {
   return (
     <div>
@@ -20,7 +20,7 @@ export const Login = () => {
                <img src='https://res.cloudinary.com/dgzfc4clj/image/upload/v1654107186/google_zj5e6q.png' style={{width:'41px', display:'flex',align:'center'}} alt = 'google'/>
             </Google>
             </Redes>
-            <h5>¿No tienes cuenta? Registrate</h5>
+            <Subtitulo>¿No tienes cuenta? Registrate</Subtitulo>
             <Boton>Iniciar Sesion</Boton>
         </Formulario>
 

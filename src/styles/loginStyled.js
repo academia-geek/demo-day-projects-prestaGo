@@ -72,3 +72,8 @@ box-sizing: border-box;
 width:100%;
 margin-top: 0.5em;
 `
+export const Subtitulo = styled.h5`
+text-align:center;
+font-size: 14px;
+margin:2em;
+`
