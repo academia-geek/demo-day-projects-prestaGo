@@ -4,7 +4,7 @@ export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  heigth: 100vh;
+  height: 100vh;
   padding: 0 20px;
 `;
 export const Formulario = styled.form`
