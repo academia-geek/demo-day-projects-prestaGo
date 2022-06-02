@@ -29,12 +29,6 @@ export const Label = styled.input`
   background: #f5f5f5;
   border: #f5f5f5;
   font-size: 14px;
-  &:before {
-        position: relative;
-        top:0;
-        
-        content: '${props => props.before}'
-    }
 `;
 export const Redes = styled.div`
   display: flex;
