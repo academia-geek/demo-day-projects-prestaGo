@@ -1,5 +1,5 @@
-import { LoginReducer } from "../Reducers/Reducers"
 import {getAuth, signInWithEmailAndPassword} from "firebase/auth"
+import { LoginTypes } from "../types/Types";
 
 export const loginAsync = (email, password)=>{
     return(dispatch)=>{
@@ -17,7 +17,7 @@ export const loginAsync = (email, password)=>{
 
 export const loginSync = (email, password)=>{
     return{
-        types: LoginReducer.login,
+        type: LoginTypes.login,
         payload: {email, password}
     }
 }
