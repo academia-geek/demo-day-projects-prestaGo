@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { Boton,Facebook, Formulario, Google, Label, Redes, Subtitulo, Titulo, Wrapper } from '../styles/loginStyled'
 export const Login = () => {
   return (
