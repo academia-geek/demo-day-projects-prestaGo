@@ -2,7 +2,8 @@ import styled from "styled-components";
 
 export const Wrapper = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: ${(props) =>
+    props.justifyContent ? props.justifyContent : "center"};
   align-items: center;
   height: 100vh;
   padding: 0 20px;
@@ -13,6 +14,8 @@ export const Formulario = styled.form`
   padding: 40px;
   border-radius: 25px;
   box-sizing: border-box;
+  background-color: ${(props) =>
+    props.backgroundColor ? props.backgroundColor : "unset"};
 `;
 export const Titulo = styled.div`
   width: 100%;
@@ -34,6 +37,16 @@ export const Redes = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const CustomButtonStyle = styled.button`
+  border: ${(props) => (props.border ? props.border : "none")};
+  border-radius: 5px;
+  color: ${(props) => props.color};
+  background-color: ${(props) => props.backgroundColor};
+  padding: 10px;
+  display: flex;
+  margin: 5px;
 `;
 
 export const Google = styled.button`
