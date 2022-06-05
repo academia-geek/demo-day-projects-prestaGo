@@ -1,10 +1,11 @@
-import { Login } from "../components/Login";
-import '../styles/stylesGlobal.css'
+import '../styles/stylesGlobal.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import AppRouters from '../routers/AppRouters';
 
 function App() {
   return (
     <div className="App">
-      <Login/>
+      <AppRouters/>
     </div>
   );
 }

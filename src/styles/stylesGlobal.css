@@ -2,7 +2,6 @@
 *{
     margin: 0px;
     padding:0px;
-    background-color:#FFFF;
     font-family: 'Inter', sans-serif;
 }
 .primary{
@@ -20,4 +19,8 @@
 }
 .placeholder {
     padding:10px;
+}
+
+.ml-20{
+    margin-left: 20px;
 }
