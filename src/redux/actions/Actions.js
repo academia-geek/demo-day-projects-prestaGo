@@ -1,4 +1,5 @@
-import {getAuth, signInWithEmailAndPassword} from "firebase/auth"
+import {getAuth, signInWithEmailAndPassword, signInWithPopup} from "firebase/auth"
+import { google } from "../../firebase/FirebaseConfig";
 import { LoginTypes } from "../types/Types";
 
 export const loginAsync = (email, password)=>{
@@ -6,7 +7,9 @@ export const loginAsync = (email, password)=>{
         const auth = getAuth();
         signInWithEmailAndPassword(auth,email, password)
         .then(({user})=>{
-            dispatch(loginSync(user.email, user.password))
+            dispatch(loginSync(user.uid, user.displayName)
+            )
+            alert('Bienvenido')
         })
         .catch (error =>{
             alert('Incorrecto')
@@ -15,9 +18,23 @@ export const loginAsync = (email, password)=>{
 }
 
 
-export const loginSync = (email, password)=>{
+export const loginSync = (id, displayName)=>{
     return{
         type: LoginTypes.login,
-        payload: {email, password}
+        payload: {id, displayName}
+    }
+}
+
+export const LoginGoogle =()=>{
+    return(dispatch)=>{
+        const auth = getAuth();
+        signInWithPopup(auth, google)
+        .then(({user})=>{
+            dispatch(loginSync(user.uid, user.displayName))
+            alert('Bienvenido')
+        })
+        .catch(e=>{
+            alert('Incorrecto')
+        })
     }
 }
