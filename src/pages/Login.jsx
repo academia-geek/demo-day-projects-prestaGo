@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import CustomButton from "../components/CustomButton";
 import useForm from "../hooks/useForm";
-import { loginAsync } from "../redux/actions/Actions";
+import { loginAsync, LoginGoogle } from "../redux/actions/Actions";
 import { ContainerInput, Icon, InputText } from "../styles/formStyled";
 
 import {
@@ -16,6 +16,8 @@ import {
   Titulo,
   Wrapper,
 } from "../styles/loginStyled";
+
+
 const Login = () => {
   const dispatch = useDispatch();
   const [formValue, handleInputChange, rest] = useForm({
@@ -30,6 +32,11 @@ const Login = () => {
     dispatch(loginAsync(email, password));
     rest();
   };
+
+  const handleGoogle=()=>{
+    dispatch(LoginGoogle());
+  }
+
 
   return (
     <div>
@@ -47,7 +54,7 @@ const Login = () => {
               <FaUser color="gray" size={24} />
             </Icon>
             <InputText
-              type="text"
+              type="email"
               placeholder="Usuario"
               autoComplete="off"
               value={email}
@@ -74,7 +81,7 @@ const Login = () => {
               value="Iniciar Sesion con Facebook"
               iconSize="24"
             ></CustomButton>
-            <CustomButton
+            <CustomButton  onClick={handleGoogle}
               color="black"
               backgroundColor="white"
               Icon={FcGoogle}
