@@ -8,14 +8,14 @@ const Footer = () => {
     <div className=' py-5'>
         <Container className='d-flex justify-content-between'>
             <div>
-                <h5>Contactanos</h5>
+                <h5 className=' text-dark'>Contactanos</h5>
                 <div className='d-flex'>          
                 <FaEnvelope color="gray" size={24} />
-                <p> Contact@prestago.com</p>
+                <p className=' mx-2'> Contact@prestago.com</p>
                 </div>
                 <div className='d-flex'>          
                 <FaPhone color="gray" size={24} />
-                <p>+57 555-55-55-5555</p>
+                <p className=' mx-2'>+57 555-55-55-5555</p>
                 </div>
             </div>
             <div>
@@ -23,16 +23,16 @@ const Footer = () => {
             </div>
            
             <div>
-            <h5>Siguenos</h5>
+            <h5 className=' text-dark'>Siguenos</h5>
                 <div className='d-flex'>
                 <div>
-                    <FaFacebook color="gray" size={24}/>
+                    <FaFacebook color="gray" size={40}/>
                 </div>
                 <div>
-                    <AiFillTwitterCircle color="gray" size={24}/>
+                    <AiFillTwitterCircle color="gray" size={44}/>
                 </div>
                 <div>
-                    <AiFillInstagram color="gray" size={24}/>
+                    <AiFillInstagram color="gray" size={44}/>
                 </div>
                 </div>  
             </div>
