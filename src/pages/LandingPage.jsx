@@ -1,5 +1,4 @@
 import React from 'react'
-import Footer from '../components/Footer'
 import LandingHeader from '../components/landing/LandingHeader'
 import SectionPasos from '../components/landing/SectionPasos'
 import SectionPresentacion from '../components/landing/SectionPresentacion'
@@ -13,7 +12,6 @@ const LandingPage = () => {
         <SectionPresentacion/>
         <SectionPasos/>
         <Simulador/>
-        <Footer/>
     </div>
   )
 }

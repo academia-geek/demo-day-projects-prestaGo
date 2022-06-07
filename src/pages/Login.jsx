@@ -41,13 +41,15 @@ const Login = () => {
   return (
     <div>
       <Wrapper>
-        <Formulario onSubmit={handleSubmit}>
+      <div>
+          <img
+            src="https://res.cloudinary.com/dxvzsg7fa/image/upload/v1654461523/PrestaGo/img-01-dk_efp3ng.png"
+            alt="info-"
+          />
+        </div>
+        <Formulario backgroundColor="#159BF8" onSubmit={handleSubmit}>
           <Titulo>
-            <img
-              src="https://res.cloudinary.com/dgzfc4clj/image/upload/v1654102012/Soluci%C3%B3n_de_credito_1_u2o7b8.png"
-              style={{ width: "111px", display: "flex", align: "center" }}
-              alt="logo"
-            />
+           <h1 className=" text-white">Inicio de Sesion</h1> 
           </Titulo>
           <ContainerInput>
             <Icon>
@@ -92,7 +94,7 @@ const Login = () => {
           </Redes>
           <Subtitulo>
             {"¿No tienes cuenta? "}
-            <Link to="/registro">Registrate</Link>
+            <Link className="text-white" to="/registro">Registrate</Link>
           </Subtitulo>
           <Boton>Iniciar Sesion</Boton>
         </Formulario>
