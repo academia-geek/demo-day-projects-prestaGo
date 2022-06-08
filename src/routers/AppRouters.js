@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Footer from "../components/Footer";
 import NavBarLanding from "../components/landing/NavBarLanding";
 import FormRegister from "../pages/FormRegister";
 import LandingPage from "../pages/LandingPage";
@@ -20,6 +21,7 @@ const AppRouters = () => {
               <Route index element={<LeagueStandings />} />
             </Route> */}
         </Routes>
+        <Footer/>
       </BrowserRouter>
     </div>
   );
