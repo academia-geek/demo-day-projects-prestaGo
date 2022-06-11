@@ -17,6 +17,8 @@ import {
   FaHome,
   FaBriefcase
 } from "react-icons/fa";
+import register from "../services/register";
+import useForm from "../hooks/useForm";
 
 const documentTypeOptions = [
   {
@@ -51,6 +53,30 @@ const documentTypeOptions = [
   }
 ];
 const FormRegister = () => {
+    const initialState = {
+      nombre_completo: "",
+      fecha_nacimiento: "",
+      numero_celular: 0,
+      tipo_documento: "",
+      n_documento: 0,
+      profesion_u_oficio: "",
+      direccion: "",
+      email: "",
+      rol: "",
+      contrasena: ""
+    };
+  
+    const [form, handleInputChange, reset] =
+      useForm(initialState);
+  
+    const handleSubmit=(e)=> {
+      e.preventDefault();
+      const data = {...form,n_documento:Number(n_documento), numero_celular:Number(numero_celular)}
+      register(data)
+      reset()
+    }
+  
+    const {nombre_completo, email, fecha_nacimiento,numero_celular,tipo_documento,n_documento, profesion_u_oficio,direccion,contrasena}=form
   return (
     <div>
       <Wrapper justifyContent="space-between">
@@ -72,6 +98,9 @@ const FormRegister = () => {
               type="text"
               placeholder="Nombre Completo"
               autoComplete="off"
+              name="nombre_completo"
+              value={nombre_completo}
+              onChange={handleInputChange}
             />
           </ContainerInput>
 
@@ -79,14 +108,18 @@ const FormRegister = () => {
             <Icon>
               <FaPhone color="gray" size={24} />
             </Icon>
-            <InputText type="text" placeholder="Telefono" autoComplete="off" />
+            <InputText type="number" placeholder="Telefono" autoComplete="off" name="numero_celular"
+              value={Number(numero_celular)}
+              onChange={handleInputChange}/>
           </ContainerInput>
 
           <ContainerInput>
             <Icon>
               <FaEnvelope color="gray" size={24} />
             </Icon>
-            <InputText type="text" placeholder="Email" autoComplete="off" />
+            <InputText type="text" placeholder="Email" autoComplete="off" name="email"
+              value={email}
+              onChange={handleInputChange} />
           </ContainerInput>
           <ContainerInput>
             <Icon>
@@ -96,13 +129,18 @@ const FormRegister = () => {
               type="date"
               placeholder="Fecha de Nacimiento"
               autoComplete="off"
+              name="fecha_nacimiento"
+              value={fecha_nacimiento}
+              onChange={handleInputChange}
             />
           </ContainerInput>
           <ContainerInput>
             <Icon>
               <FaIdCard color="gray" size={24} />
             </Icon>
-            <InputSelect name="documentType">
+            <InputSelect name="tipo_documento"
+              value={tipo_documento}
+              onChange={handleInputChange}>
               <option value="" hidden>
                 Tipo de documento
               </option>
@@ -117,13 +155,17 @@ const FormRegister = () => {
             <Icon>
               <FaIdCard color="gray" size={24} />
             </Icon>
-            <InputText type="text" placeholder="Cedula" autoComplete="off" />
+            <InputText type="number" placeholder="Cedula" autoComplete="off" name="n_documento"
+              value={Number(n_documento)}
+              onChange={handleInputChange} />
           </ContainerInput>
           <ContainerInput>
             <Icon>
               <FaHome color="gray" size={24} />
             </Icon>
-            <InputText type="text" placeholder="Dirección" autoComplete="off" />
+            <InputText type="text" placeholder="Dirección" autoComplete="off" name="direccion"
+              value={direccion}
+              onChange={handleInputChange} />
           </ContainerInput>
           <ContainerInput>
             <Icon>
@@ -133,9 +175,25 @@ const FormRegister = () => {
               type="text"
               placeholder="Profesion u Oficio"
               autoComplete="off"
+              name="profesion_u_oficio"
+              value={profesion_u_oficio}
+              onChange={handleInputChange}
             />
           </ContainerInput>
-          <Boton type="submit">Registrarse</Boton>
+          <ContainerInput>
+            <Icon>
+              <FaBriefcase color="gray" size={24} />
+            </Icon>
+            <InputText
+              type="text"
+              placeholder="Contraseña"
+              autoComplete="off"
+              name="contrasena"
+              value={contrasena}
+              onChange={handleInputChange}
+            />
+          </ContainerInput>
+          <Boton type="submit" onClick={handleSubmit}>Registrarse</Boton>
         </Formulario>
       </Wrapper>
     </div>

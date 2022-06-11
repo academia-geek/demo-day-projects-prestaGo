@@ -43,7 +43,7 @@ const Login = () => {
       <Wrapper>
       <div>
           <img
-            src="https://res.cloudinary.com/dxvzsg7fa/image/upload/v1654461523/PrestaGo/img-01-dk_efp3ng.png"
+            src="https://res.cloudinary.com/dxvzsg7fa/image/upload/v1654638700/PrestaGo/giro-ld01-mb_ihqrkc.png"
             alt="info-"
           />
         </div>
