@@ -62,7 +62,7 @@ const FormRegister = () => {
       profesion_u_oficio: "",
       direccion: "",
       email: "",
-      rol: "",
+      rol: "USUARIO",
       contrasena: ""
     };
   
