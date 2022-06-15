@@ -1,21 +1,26 @@
-import React from 'react'
-import { Header, SubtituloHeader, TituloHeader } from '../../styles/landingStyles'
-
+import React from "react";
+import {
+  ContainerTitle,
+  Header,
+  SubtituloHeader,
+  TituloHeader,
+} from "../../styles/landingStyles";
 
 const LandingHeader = () => {
   return (
-      <>
+    <>
       <Header>
-        <TituloHeader>
+        <ContainerTitle>
+          <TituloHeader>
             <h1>PrestaGo</h1>
-        </TituloHeader>
-        <SubtituloHeader>
+          </TituloHeader>
+          <SubtituloHeader>
             <p>Pide tu cupo de crédito en 15 minutos </p>
-        </SubtituloHeader>
-    </Header>
-      </>
-    
-  )
-}
+          </SubtituloHeader>
+        </ContainerTitle>
+      </Header>
+    </>
+  );
+};
 
-export default LandingHeader
+export default LandingHeader;

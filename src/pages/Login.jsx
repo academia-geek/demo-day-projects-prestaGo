@@ -57,6 +57,7 @@ const Login = () => {
             </Icon>
             <InputText
               type="email"
+              name="email"
               placeholder="Usuario"
               autoComplete="off"
               value={email}
@@ -70,6 +71,7 @@ const Login = () => {
             </Icon>
             <InputText
               type="password"
+              name="password"
               placeholder="Contraseña"
               autoComplete="off"
               value={password} onChange={handleInputChange}

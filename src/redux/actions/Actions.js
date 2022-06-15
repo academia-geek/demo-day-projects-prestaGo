@@ -1,6 +1,7 @@
 import {getAuth, signInWithEmailAndPassword, signInWithPopup} from "firebase/auth"
 import { google } from "../../firebase/FirebaseConfig";
-import { LoginTypes } from "../types/Types";
+import register from "../../services/register";
+import { LoginTypes, RegisterTypes } from "../types/Types";
 
 export const loginAsync = (email, password)=>{
     return(dispatch)=>{
@@ -16,7 +17,6 @@ export const loginAsync = (email, password)=>{
         })
     }
 }
-
 
 export const loginSync = (id, displayName)=>{
     return{
@@ -35,6 +35,16 @@ export const LoginGoogle =()=>{
         })
         .catch(e=>{
             alert('Incorrecto')
+        })
+    }
+}
+
+export const registerAction =  (data) =>{
+    return async (dispatch) =>{
+        const result = await register(data);
+        dispatch({
+            type: RegisterTypes.register,
+            payload: result
         })
     }
 }
