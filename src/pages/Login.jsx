@@ -99,6 +99,7 @@ const Login = () => {
           <Boton>Iniciar Sesion</Boton>
         </Formulario>
       </Wrapper>
+      <hr/>
     </div>
   );
 };

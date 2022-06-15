@@ -196,6 +196,8 @@ const FormRegister = () => {
           <Boton type="submit" onClick={handleSubmit}>Registrarse</Boton>
         </Formulario>
       </Wrapper>
+      <br />
+      <hr/>
     </div>
   );
 };
