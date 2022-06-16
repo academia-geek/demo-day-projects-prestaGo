@@ -1,4 +1,5 @@
 import {getAuth, signInWithEmailAndPassword, signInWithPopup} from "firebase/auth"
+import Swal from "sweetalert2";
 import { google } from "../../firebase/FirebaseConfig";
 import register from "../../services/register";
 import { LoginTypes, RegisterTypes } from "../types/Types";
@@ -41,10 +42,31 @@ export const LoginGoogle =()=>{
 
 export const registerAction =  (data) =>{
     return async (dispatch) =>{
-        const result = await register(data);
+        try {
+            const result = await register(data);
+        Swal.fire({
+            position: "center",
+            text: `Registro Exitoso`,
+            icon: "success",
+            title: "Exitoso!!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
         dispatch({
             type: RegisterTypes.register,
             payload: result
         })
+        } catch (error) {
+            console.log(error);
+            Swal.fire({
+              position: "center",
+              text: `Ocurrio un error`,
+              icon: "error",
+              title: "Error",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+        }
+        
     }
 }

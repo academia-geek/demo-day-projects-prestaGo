@@ -104,7 +104,7 @@ const FormRegister = () => {
     }),
     onSubmit: (data) => {
       dispatch(registerAction(data));
-      formik.resetForm(formik.initialStatus);
+      //formik.resetForm(formik.initialStatus);
     },
   });
 
@@ -146,7 +146,7 @@ const FormRegister = () => {
               onBlur={formik.handleBlur}
             />
           </ContainerInput>
-          {formik.touched.name && formik.errors.nombre_completo ? (
+          {formik.touched.nombre_completo && formik.errors.nombre_completo ? (
           <Container className="error-validation">
             {formik.errors.nombre_completo}
           </Container>
@@ -166,7 +166,7 @@ const FormRegister = () => {
               onBlur={formik.handleBlur}
             />
           </ContainerInput>
-          {formik.touched.name && formik.errors.numero_celular ? (
+          {formik.touched.numero_celular && formik.errors.numero_celular ? (
           <Container className="error-validation">
             {formik.errors.numero_celular}
           </Container>
@@ -186,7 +186,7 @@ const FormRegister = () => {
               onBlur={formik.handleBlur}
             />
           </ContainerInput>
-          {formik.touched.name && formik.errors.email ? (
+          {formik.touched.email && formik.errors.email ? (
           <Container className="error-validation">
             {formik.errors.email}
           </Container>
@@ -239,7 +239,7 @@ const FormRegister = () => {
               onBlur={formik.handleBlur}
             />
           </ContainerInput>
-          {formik.touched.name && formik.errors.n_documento ? (
+          {formik.touched.n_documento && formik.errors.n_documento ? (
           <Container className="error-validation">
             {formik.errors.n_documento}
           </Container>
@@ -258,7 +258,7 @@ const FormRegister = () => {
               onBlur={formik.handleBlur}
             />
           </ContainerInput>
-          {formik.touched.name && formik.errors.direccion ? (
+          {formik.touched.direccion && formik.errors.direccion ? (
           <Container className="error-validation">
             {formik.errors.direccion}
           </Container>
@@ -291,7 +291,7 @@ const FormRegister = () => {
               onBlur={formik.handleBlur}
             />
           </ContainerInput>
-          {formik.touched.name && formik.errors.contrasena ? (
+          {formik.touched.contrasena && formik.errors.contrasena ? (
           <Container className="error-validation">
             {formik.errors.contrasena}
           </Container>
