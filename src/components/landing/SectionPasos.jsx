@@ -7,6 +7,7 @@ const SectionPasos = () => {
     <div>
         <Container>
             <h1 className='text-center pt-5'>Pide tu crédito 100% en línea en tres pasos.</h1>
+            <hr />
             <SectionProceso>
             <div>
                 <div>

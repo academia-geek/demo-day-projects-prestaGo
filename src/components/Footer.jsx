@@ -6,6 +6,7 @@ import { LogoFooter } from '../styles/footerStyle';
 const Footer = () => {
   return (
     <div className=' py-5'>
+        
         <Container className='d-flex justify-content-between'>
             <div>
                 <h5 className=' text-dark'>Contactanos</h5>

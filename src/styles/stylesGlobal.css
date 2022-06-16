@@ -24,3 +24,8 @@
 .ml-20{
     margin-left: 20px;
 }
+.error-validation{
+    margin: 0 auto 1rem auto;
+    color: yellow;
+    font-weight: bold;
+  }
