@@ -12,7 +12,7 @@ const prestamoSchema = joi_1.default.object({
     fecha_creacion: joi_1.default.date().required(),
     tasa_interes: joi_1.default.string().required(),
     estado: joi_1.default.string().required(),
-    id_registro: joi_1.default.number().required()
+    id_registro: joi_1.default.number()
 });
 exports.default = prestamoSchema;
 //# sourceMappingURL=prestamo.schema.js.map

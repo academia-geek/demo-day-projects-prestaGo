@@ -5,9 +5,6 @@
  *       User_no_registered:
  *            type: object
  *            properties:
- *                _id:
- *                     type: string
- *                     description: objectId of user no registered
  *                full_name:
  *                     type: string
  *                     description: full name of user no registered
@@ -82,7 +79,7 @@
  *        - in: path
  *          name: id
  *          schema:
- *              type: number
+ *              type: string
  *          required: true
  *          description: idenfication of the user no registered
  *      requestBody:
@@ -113,7 +110,7 @@
  *        - in: path
  *          name: id
  *          schema:
- *              type: number
+ *              type: string
  *          required: true
  *          description: idenfication of the user no registered
  *      responses:
@@ -463,6 +460,12 @@
  *                cuota_pagar:
  *                     type: number
  *                     description: amount of payment
+ *                cuotas_faltantes:
+ *                     type: number
+ *                     description: amount of pending payments
+ *                saldo_restante:
+ *                     type: number
+ *                     description: amount of pending payments
  *                id_prestamo:
  *                     type: number
  *                     description: id of loan
@@ -473,6 +476,8 @@
  *                - fecha_pago_cuota
  *                - tiempo_pago
  *                - cuota_pagar
+ *                - cuotas_faltantes
+ *                - saldo_restante
  *                - id_prestamo
  *                - id_registro
  * @swagger

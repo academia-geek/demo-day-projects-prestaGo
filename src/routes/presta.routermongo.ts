@@ -1,7 +1,7 @@
 import express, { Request, Response } from "express";
 import { NextFunction } from "express";
 import { ObjectId } from "mongodb";
-// import { decodeToken } from '../firebase/adminTokens';
+import { decodeToken } from '../firebase/adminTokens';
 import { collections } from "../services/database.service";
 import { ContainerTypes, ExpressJoiError } from "express-joi-validation";
 import validator from '../utilities/validator';
@@ -20,16 +20,16 @@ prestaRouter.use((err: any|ExpressJoiError, _req: Request, res: Response, next: 
     }
 });
 
-prestaRouter.get("/mongo",  async (_req: Request, res: Response) => {
+prestaRouter.get("/mongo", decodeToken, async (_req: Request, res: Response) => {
+    const user_no_register = await collections.user_no_register.find({}).toArray();
     try {
-        const user_no_register = await collections.user_no_register.find({}).toArray();
-        res.status(200).send(user_no_register);
+        return res.status(200).send(user_no_register);
     } catch (error) {
-        res.status(500).send(error.message);
+       return res.status(500).send(error.message);
     }
 });
 
-prestaRouter.post("/mongo", validator.body(prestaSchema), async (_req: Request, res: Response) => {
+prestaRouter.post("/mongo", decodeToken, validator.body(prestaSchema), async (_req: Request, res: Response) => {
     try {
         const newUser_no_register = _req.body;
         const result = await collections.user_no_register.insertOne(newUser_no_register);
@@ -42,9 +42,8 @@ prestaRouter.post("/mongo", validator.body(prestaSchema), async (_req: Request, 
     }
 });
 
-prestaRouter.put("/mongo/:id", validator.body(prestaSchema), async (_req: Request, res: Response) => {
+prestaRouter.put("/mongo/:id",  decodeToken, validator.body(prestaSchema), async (_req: Request, res: Response) => {
     const id = _req.params.id;
-
     try {
         const updatedUser_no_register = _req.body;
         const query = { _id: new ObjectId(id) };
@@ -59,9 +58,8 @@ prestaRouter.put("/mongo/:id", validator.body(prestaSchema), async (_req: Reques
     }
 });
 
-prestaRouter.delete("/mongo/:id",  validator.body(prestaSchema), async (req: Request, res: Response) => {
+prestaRouter.delete("/mongo/:id",  decodeToken, async (req: Request, res: Response) => {
     const id = req.params.id;
-
     try {
         const query = { _id: new ObjectId(id) };
         const result = await collections.user_no_register.deleteOne(query);

@@ -9,6 +9,8 @@ const pagoSchema = joi_1.default.object({
     fecha_pago_cuotas: joi_1.default.date().required(),
     tiempo_pagar: joi_1.default.number().required(),
     cuota_pagar: joi_1.default.number().required(),
+    cuotas_faltantes: joi_1.default.number().required(),
+    saldo_restante: joi_1.default.number().required(),
     id_prestamo: joi_1.default.number().required(),
     id_registro: joi_1.default.number().required()
 });

@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.prestaRouter = void 0;
 const express_1 = __importDefault(require("express"));
 const mongodb_1 = require("mongodb");
-// import { decodeToken } from '../firebase/adminTokens';
+const adminTokens_1 = require("../firebase/adminTokens");
 const database_service_1 = require("../services/database.service");
 const express_joi_validation_1 = require("express-joi-validation");
 const validator_1 = __importDefault(require("../utilities/validator"));
@@ -31,16 +31,16 @@ exports.prestaRouter.use((err, _req, res, next) => {
         res.status(500).send('Internal server error');
     }
 });
-exports.prestaRouter.get("/mongo", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.prestaRouter.get("/mongo", adminTokens_1.decodeToken, (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const user_no_register = yield database_service_1.collections.user_no_register.find({}).toArray();
     try {
-        const user_no_register = yield database_service_1.collections.user_no_register.find({}).toArray();
-        res.status(200).send(user_no_register);
+        return res.status(200).send(user_no_register);
     }
     catch (error) {
-        res.status(500).send(error.message);
+        return res.status(500).send(error.message);
     }
 }));
-exports.prestaRouter.post("/mongo", validator_1.default.body(user_no_schema_1.default), (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.prestaRouter.post("/mongo", adminTokens_1.decodeToken, validator_1.default.body(user_no_schema_1.default), (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const newUser_no_register = _req.body;
         const result = yield database_service_1.collections.user_no_register.insertOne(newUser_no_register);
@@ -53,7 +53,7 @@ exports.prestaRouter.post("/mongo", validator_1.default.body(user_no_schema_1.de
         res.status(400).send(error.message);
     }
 }));
-exports.prestaRouter.put("/mongo:id", validator_1.default.body(user_no_schema_1.default), (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.prestaRouter.put("/mongo/:id", adminTokens_1.decodeToken, validator_1.default.body(user_no_schema_1.default), (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = _req.params.id;
     try {
         const updatedUser_no_register = _req.body;
@@ -68,7 +68,7 @@ exports.prestaRouter.put("/mongo:id", validator_1.default.body(user_no_schema_1.
         res.status(400).send(error.message);
     }
 }));
-exports.prestaRouter.delete("mongo/:id", validator_1.default.body(user_no_schema_1.default), (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.prestaRouter.delete("/mongo/:id", adminTokens_1.decodeToken, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = req.params.id;
     try {
         const query = { _id: new mongodb_1.ObjectId(id) };

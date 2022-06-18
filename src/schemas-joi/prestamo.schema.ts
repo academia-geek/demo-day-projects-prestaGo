@@ -8,7 +8,7 @@ const prestamoSchema = Joi.object({
     fecha_creacion: Joi.date().required(),
     tasa_interes: Joi.string().required(),
     estado: Joi.string().required(),
-    id_registro: Joi.number().required()
+    id_registro: Joi.number()
  });
 
  export default prestamoSchema;
