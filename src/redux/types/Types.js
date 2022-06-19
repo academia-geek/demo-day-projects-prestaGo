@@ -6,3 +6,6 @@ export const LoginTypes = {
 export const RegisterTypes = {
     register:'register'
 }
+export const simuladorTypes = {
+    simulador:'simulador'
+}

@@ -16,7 +16,6 @@ export const Icon = styled.span`
   margin-right: 20px;
   position: absolute;
 `;
-
 export const InputText = styled.input`
   width: 100%;
   height: 3em;
@@ -27,7 +26,6 @@ export const InputText = styled.input`
   padding-left: 60px;
   padding-right: 20px;
 `;
-
 export const InputSelect = styled.select`
   width: 100%;
   height: 3em;

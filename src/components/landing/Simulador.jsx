@@ -12,10 +12,12 @@ import { FaUser, FaEnvelope, FaRegCalendarAlt } from "react-icons/fa";
 import {AiFillDollarCircle} from "react-icons/ai"
 import { Boton } from "../../styles/loginStyled";
 import useForm from "../../hooks/useForm";
-import simular from "../../services/simulador";
+import { useDispatch } from "react-redux";
+import { simuladorAction } from "../../redux/actions/Actions";
 
 
 const Simulador = () => {
+  const dispacth = useDispatch()
   const initialState = {
   full_name: "",
   email: "",
@@ -28,7 +30,7 @@ const Simulador = () => {
 
   const handleSubmit=(e)=> {
     e.preventDefault();
-    simular(form)
+    dispacth(simuladorAction(form))
     reset()
   }
 

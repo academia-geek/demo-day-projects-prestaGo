@@ -1,5 +1,6 @@
 import axios from "axios";
-const url = "http://104.196.134.127:5080";
+import Config from "../config/Config";
+const url = Config.getUrlService();
 
 const Register = async (data) => {
   try {
