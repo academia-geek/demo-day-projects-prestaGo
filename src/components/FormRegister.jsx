@@ -1,6 +1,5 @@
 import React from 'react'
 import {
-    ContainerForm,
     ContainerInput,
     Icon,
     InputSelect,
@@ -120,8 +119,7 @@ const FormRegister = () => {
       } = formik.values;
 
   return (
-    <div>
-        <div>
+    <>
         <Formulario>
           <Titulo>
             <Titulos color="white">Registrarse</Titulos>
@@ -294,10 +292,8 @@ const FormRegister = () => {
             Registrarse
           </Boton>
         </Formulario>
-
-        </div>
         
-    </div>
+    </>
   )
 }
 

@@ -8,7 +8,7 @@ import { auth } from "../firebase/FirebaseConfig";
 import LandingPage from "../pages/LandingPage";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import { loginAsync, loginSync } from "../redux/actions/Actions";
+import { loginSync } from "../redux/actions/Actions";
 import DashboarRouters from "./DashboarRouter";
 import { PrivateRouter } from "./PrivateRouter";
 import PublicRouter from "./PublicRouter";

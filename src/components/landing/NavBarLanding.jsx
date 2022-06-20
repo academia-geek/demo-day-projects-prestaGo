@@ -48,6 +48,7 @@ const NavBarLanding = () => {
           </div>
         </nav>
       </Container>
+      <hr />
     </div>
   );
 };

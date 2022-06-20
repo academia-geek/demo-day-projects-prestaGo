@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet, Route, Routes } from "react-router-dom";
 import "../styles/Dashboard.scss";
+import "../styles/stylesGlobal.css"
 import Sidebar from "../components/Sidebar";
 import User from "../pages/User";
 import Extracto from "../pages/Extracto";

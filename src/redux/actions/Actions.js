@@ -1,5 +1,5 @@
 import {
-  getAuth,
+  createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -58,9 +58,17 @@ export const logout = () => {
 };
 
 export const registerAction = (data) => {
+  
   return async (dispatch) => {
     try {
+      const newUsr = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.contrasena
+      ) 
+      console.log(newUsr)
       const result = await register(data);
+      
       Swal.fire({
         position: "center",
         text: `Registro Exitoso`,
@@ -91,13 +99,14 @@ export const simuladorAction = (data) => {
   return async (dispatch) => {
     try {
       const result = await simular(data);
+      console.log(result)
       Swal.fire({
         position: "center",
         text: `Revisa tu correo , alli encontraras los resultados`,
         icon: "success",
         title: "Proceso Exitoso!!",
-        showConfirmButton: false,
-        timer: 2500,
+        showConfirmButton: true,
+        
       });
       dispatch({
         type: simuladorTypes.simulador,
@@ -110,8 +119,8 @@ export const simuladorAction = (data) => {
         text: `Ocurrio un error, intentalo de nuevo`,
         icon: "error",
         title: "Error",
-        showConfirmButton: false,
-        timer: 1500,
+        showConfirmButton: true,
+        
       });
     }
   };
