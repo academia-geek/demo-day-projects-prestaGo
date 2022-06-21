@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 `;
 export const Formulario = styled.form`
   width: 100%;
-  max-width: 700px;
+  /* max-width: 700px; */
   padding: 40px;
   border-radius: 25px;
   box-sizing: border-box;

@@ -16,7 +16,6 @@ export const Icon = styled.span`
   margin-right: 20px;
   position: absolute;
 `;
-
 export const InputText = styled.input`
   width: 100%;
   height: 3em;
@@ -27,7 +26,6 @@ export const InputText = styled.input`
   padding-left: 60px;
   padding-right: 20px;
 `;
-
 export const InputSelect = styled.select`
   width: 100%;
   height: 3em;
@@ -49,4 +47,10 @@ export const InputSelect = styled.select`
     white-space: pre;
     min-height: 20px;
   }
+`;
+export const ContainerFormRegister=styled.div`
+    width: 500px;
+    background-color: #00a8de;
+    border-radius: 15px;
+
 `;

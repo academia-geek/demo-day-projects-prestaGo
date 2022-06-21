@@ -1,21 +1,22 @@
 
 import { initializeApp } from "firebase/app";
-import { GoogleAuthProvider } from "firebase/auth";
+import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBdQvUo4v_K9EgF0GFqffg9SP6RoG2efa0",
-  authDomain: "prestago-9fec0.firebaseapp.com",
-  projectId: "prestago-9fec0",
-  storageBucket: "prestago-9fec0.appspot.com",
-  messagingSenderId: "353270685657",
-  appId: "1:353270685657:web:dd7b1ab623794987a383c8"
+  apiKey: "AIzaSyBn8-Pxs1c1zmb2NvGMjlWPexVI57VR3A0",
+  authDomain: "prestago-69caa.firebaseapp.com",
+  projectId: "prestago-69caa",
+  storageBucket: "prestago-69caa.appspot.com",
+  messagingSenderId: "674622002979",
+  appId: "1:674622002979:web:7800eaed6b1da97f63de96"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const google = new GoogleAuthProvider();
-
+const auth  = getAuth(app)
 export{
     app,
-    google
+    google,
+    auth
 }

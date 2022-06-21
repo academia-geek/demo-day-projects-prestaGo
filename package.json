@@ -20,6 +20,7 @@
     "react-scripts": "5.0.1",
     "redux-thunk": "^2.4.1",
     "router-dom": "^2.2.9",
+    "sass": "^1.52.3",
     "styled-components": "^5.3.5",
     "sweetalert2": "^11.4.17",
     "web-vitals": "^2.1.4"
