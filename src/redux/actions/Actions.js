@@ -1,4 +1,3 @@
-import { async } from "@firebase/util";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -118,16 +117,12 @@ export const simuladorAction = (data) => {
     try {
       const result = await simular(data);
       console.log(result);
-      Swal.fire({
-        position: "center",
-        text: `Revisa tu correo , alli encontraras los resultados`,
-        icon: "success",
-        title: "Proceso Exitoso!!",
-        showConfirmButton: true,
-      });
+      
       dispatch({
         type: simuladorTypes.simulador,
-        payload: result,
+        payload: {
+          showModalCalculo:true
+        },
       });
     } catch (error) {
       console.log(error);

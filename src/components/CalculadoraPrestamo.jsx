@@ -11,8 +11,6 @@ import { Boton } from "../styles/loginStyled";
 const CalculadoraPrestamo = () => {
   const dispacth = useDispatch();
   const initialState = {
-    full_name: "",
-    email: "",
     monto_prestar: 0,
     plazo_meses: "",
   };

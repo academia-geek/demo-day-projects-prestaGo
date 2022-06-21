@@ -4,6 +4,7 @@ import { AiFillHome, AiFillFileText } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
 import { BsFillCreditCard2BackFill } from "react-icons/bs";
 import "../styles/sidebar.scss";
+import "../styles/stylesGlobal.css"
 import { Button } from "react-bootstrap";
 import { logout } from "../redux/actions/Actions";
 import { useDispatch, useSelector } from "react-redux";
@@ -81,7 +82,7 @@ const Sidebar = () => {
   }, [location, user, role]);
 
   return (
-    <div className="sidebar bg-primary">
+    <div className="sidebar bg-sidebar">
       <div className="sidebar_logo m-5">
         <LogoDashboard imageUrl="https://res.cloudinary.com/dxvzsg7fa/image/upload/v1655577350/PrestaGo/Dise%C3%B1o_sin_t%C3%ADtulo_wzosra.png" />
       </div>
