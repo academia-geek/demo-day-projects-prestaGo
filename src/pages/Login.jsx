@@ -79,13 +79,13 @@ const Login = () => {
               />
             </ContainerInput>
             <Redes>
-              <CustomButton
+              {/* <CustomButton
                 color="white"
                 backgroundColor="blue"
                 Icon={FaFacebook}
                 value="Iniciar Sesion con Facebook"
                 iconSize="24"
-              ></CustomButton>
+              ></CustomButton> */}
               <CustomButton
                 onClick={handleGoogle}
                 color="black"

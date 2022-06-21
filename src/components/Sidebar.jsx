@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FaSignOutAlt } from "react-icons/fa";
 import LogoDashboard from "./LogoDashboard";
 
-const sidebarNavItems = [
+let sidebarNavItems = [
   {
     display: "Principal",
     icon: <AiFillHome />,
@@ -60,29 +60,48 @@ const Sidebar = () => {
   const indicatorRef = useRef();
   const location = useLocation();
   const user = useSelector((state) => state.auth);
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("usuario");
 
   useEffect(() => {
     setTimeout(() => {
       const sidebarItem =
         sidebarRef.current.querySelector(".sidebar_menu_item");
-      indicatorRef.current.style.height = `${sidebarItem.clientHeight}px`;
-      setStepHeight(sidebarItem.clientHeight);
+      indicatorRef.current.style.height = `${sidebarItem?.clientHeight}px`;
+      setStepHeight(sidebarItem?.clientHeight);
     }, 50);
     const curPath = window.location.pathname.split("/")[1];
-    console.log(user);
+
     if (user) {
       setRole(user.rol);
     }
-
+    if (role && role !== "admin") {
+      sidebarNavItems = sidebarNavItems.filter((item)=>item.display !=="Usuarios")
+    }
     const activeItem = sidebarNavItems.findIndex(
       (item) => item.section === curPath
     );
     setActiveIndex(curPath.length === 0 ? 0 : activeItem);
   }, [location, user, role]);
-
+  const menuSidebar = []
+  if(role){
+    sidebarNavItems.map((item, index) => {
+      menuSidebar.push(
+        <Link to={item.to} key={index}>
+              <div
+                className={`sidebar_menu_item ${
+                  activeIndex === index ? "active" : ""
+                }`}
+              >
+                <div className="sidebar_menu_item_icon">{item.icon}</div>
+                <div className="sidebar_menu_item_text">{item.display}</div>
+              </div>
+            </Link>
+      )
+      return item
+    })
+  }
   return (
-    <div className="sidebar bg-sidebar">
+    <div className="sidebar bg-primary">
       <div className="sidebar_logo m-5">
         <LogoDashboard imageUrl="https://res.cloudinary.com/dxvzsg7fa/image/upload/v1655577350/PrestaGo/Dise%C3%B1o_sin_t%C3%ADtulo_wzosra.png" />
       </div>
@@ -96,25 +115,18 @@ const Sidebar = () => {
             }px)`,
           }}
         ></div>
-        {sidebarNavItems.map((item, index) =>
-          role === "admin" ? (
-            <Link to={item.to} key={index}>
-              <div
-                className={`sidebar_menu_item ${
-                  activeIndex === index ? "active" : ""
-                }`}
-              >
-                <div className="sidebar_menu_item_icon">{item.icon}</div>
-                <div className="sidebar_menu_item_text">{item.display}</div>
-              </div>
-            </Link>
-          ) : item.display === "Usuarios" ? (
-            <></>
-          ) : (
-            <></>
-          )
-        )}
-
+        {sidebarNavItems.map((item, index) =>(
+          <Link to={item.to} key={index}>
+          <div
+            className={`sidebar_menu_item ${
+              activeIndex === index ? "active" : ""
+            }`}
+          >
+            <div className="sidebar_menu_item_icon">{item.icon}</div>
+            <div className="sidebar_menu_item_text">{item.display}</div>
+          </div>
+        </Link>
+        ))}
         <div style={{ padding: "50px 0px 0px 150px" }}>
           <Button variant="danger" size="s" onClick={() => dispatch(logout())}>
             <FaSignOutAlt />

@@ -14,7 +14,7 @@ export const loginAsync = (email, password) => {
   return async (dispatch) => {
     try {
       const user = await signInWithEmailAndPassword(auth, email, password);
-      const dataUser = await getDataUser();
+      const dataUser = await getDataUser(user.accessToken);
       const userRegister = dataUser.filter((item) => item.email === email);
       console.log(userRegister);
       dispatch(loginSync(user));

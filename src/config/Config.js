@@ -4,4 +4,4 @@ class Config {
         return url
     }
 }
-module.exports = Config
+export default Config
