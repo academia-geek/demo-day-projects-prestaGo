@@ -284,7 +284,7 @@ const FormRegister = () => {
             onBlur={formik.handleBlur}
           />
         </ContainerInput>
-        {role == "admin" ? (
+        {role === "admin" ? (
           <ContainerInput>
             <Icon>
               <FaIdCard color="gray" size={24} />
