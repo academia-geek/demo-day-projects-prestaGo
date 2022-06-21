@@ -4,7 +4,7 @@ const url = Config.getUrlService()
  const solicitarCredito = async (data, token) =>{
     const dataCredito = axios.post(`${url}/api/prestamo`, data,{
         headers:{
-            authorization: `Bearer ${token}` 
+            'Authorization': `Bearer ${token}` 
         }
     })
 }

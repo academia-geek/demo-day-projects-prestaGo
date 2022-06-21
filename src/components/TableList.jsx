@@ -24,8 +24,8 @@ const TableList = ({ data, dataHead }) => {
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => (
-              <tr>{buildData(item)}</tr>
+            {data.map((item, index) => (
+              <tr key={index}>{buildData(item)}</tr>
             ))}
           </tbody>
         </Table>

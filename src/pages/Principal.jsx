@@ -1,12 +1,12 @@
 import React from 'react'
-import Simulador from '../components/landing/Simulador'
+import CalculadoraPrestamo from '../components/CalculadoraPrestamo'
 import { ContainerPagePrincipal } from '../styles/principal'
 
 const Principal = () => {
   return (
     <div>
         <ContainerPagePrincipal>
-            <Simulador/>
+            <CalculadoraPrestamo/>
         </ContainerPagePrincipal>
     </div>
   )

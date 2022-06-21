@@ -53,7 +53,7 @@ export const SectionSimulador = styled.div`
 `;
 
 export const ImgSimulador = styled.img`
-  width: 100%;
+  width: 90%;
 `;
 
 export const ContainerImgSimulador = styled.div`

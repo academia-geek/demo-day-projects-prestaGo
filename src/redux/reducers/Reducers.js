@@ -1,4 +1,4 @@
-import { LoginTypes, RegisterTypes, simuladorTypes } from "../types/Types";
+import { LoginTypes, RegisterTypes, simuladorTypes, userTypes } from "../types/Types";
 const authState = {
   isAuthenticated: false,
 };
@@ -40,3 +40,12 @@ export const simuladorReducer = (state = {}, action) => {
       return state;
   }
 };
+
+export const usersReducer = (state = [], action)=>{
+  switch (action.type) {
+    case userTypes.users:
+      return action.payload  
+    default:
+      return state  
+  }
+}
