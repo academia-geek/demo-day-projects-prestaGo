@@ -1,6 +1,6 @@
 import React from "react";
 import { Container } from "react-bootstrap";
-import { FaFacebook, FaKey, FaUser } from "react-icons/fa";
+import { FaKey, FaUser } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -79,13 +79,6 @@ const Login = () => {
               />
             </ContainerInput>
             <Redes>
-              {/* <CustomButton
-                color="white"
-                backgroundColor="blue"
-                Icon={FaFacebook}
-                value="Iniciar Sesion con Facebook"
-                iconSize="24"
-              ></CustomButton> */}
               <CustomButton
                 onClick={handleGoogle}
                 color="black"
