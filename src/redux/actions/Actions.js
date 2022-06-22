@@ -28,8 +28,7 @@ export const loginAsync = (email, password) => {
         displayName: user.displayName,
         ...userRegister[0],
       };
-      console.log(newDataUser);
-      dispatch(loginSync(user));
+      return loginSync(newDataUser)
     } catch (error) {
       console.log(error);
     }
@@ -37,17 +36,18 @@ export const loginAsync = (email, password) => {
 };
 
 export const loginSync = (user) => {
-  
-  return {
-    type: LoginTypes.login,
-    payload: {
-      id: user.id,
-      name: user.displayName || user.nombre_completo,
-      accessToken: user.accessToken,
-      rol: user.rol,
-      isAuthenticated: true,
-    },
-  };
+  return (dispatch)=>{
+    dispatch({
+      type: LoginTypes.login,
+      payload: {
+        id: user.id,
+        name: user.displayName || user.nombre_completo,
+        accessToken: user.accessToken,
+        rol: user.rol,
+        isAuthenticated: true,
+      },
+    })
+  }
 };
 
 
@@ -200,11 +200,33 @@ export const users = (token) => {
   };
 };
 
-export const prestamoReducer = (data, token) => {
+export const prestamoAction = (data, token) => {
   return async (dispatch) => {
     try {
+      console.log(`====`)
+      console.log(data)
+      console.log(`====`)
       const prestamo = await solicitarCredito(data, token);
       console.log(prestamo);
+      if (prestamo){
+        Swal.fire({
+          position: "center",
+          text: `Prestamo Solicitado con Exitoso`,
+          icon: "success",
+          title: "Exito!!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      } else {
+        Swal.fire({
+          position: "center",
+          text: `Ocurrio un error, intentalo de nuevo`,
+          icon: "error",
+          title: "Error",
+          showConfirmButton: true,
+        });
+      }
+      
     } catch (error) {
       console.log(error);
     }

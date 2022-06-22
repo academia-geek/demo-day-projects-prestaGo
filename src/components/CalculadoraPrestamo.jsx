@@ -1,44 +1,50 @@
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 import { Form } from "react-bootstrap";
 import { AiFillDollarCircle } from "react-icons/ai";
 import { FaRegCalendarAlt } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import useForm from "../hooks/useForm";
-import { prestamoReducer, simuladorAction } from "../redux/actions/Actions";
+import { prestamoAction, simuladorAction } from "../redux/actions/Actions";
 import { ContainerInput, Icon, InputText } from "../styles/formStyled";
 import { Boton } from "../styles/loginStyled";
 const CalculadoraPrestamo = () => {
   const dispacth = useDispatch();
   const user = useSelector((state) => state.auth);
-
   const initialState = {
     monto_prestar: 0,
     plazo_meses: "",
   };
-  let btnLabel;
-  if (user.isAuthenticated) {
-    btnLabel = "Solicitar Prestamo";
-    
-    Object.assign(initialState, {
-      nombre_completo: user.name,
-      fecha_creacion: Date.now(),
-      id_registro: user.id,
-    });
+  const initialStateAuth = {
+    ...initialState,
+    nombre_completo: user.name,
+    fecha_creacion: Date.now(),
+    id_registro: user.id,
+  };
+  const [btnlabel, setBtnLabel] = useState("Calcular Prestamo");
+  const [loading, setLoading] = useState(true);
 
-  } else {
-    btnLabel = "Calcular Prestamo";
-  }
+  useEffect(() => {
+    if (loading) {
+      if (user.isAuthenticated) {
+        setBtnLabel("Solicitar Prestamo");
+        setLoading(false);
+      } else {
+        setBtnLabel("Calcular Prestamo");
+      }
+    }
+  }, [user, btnlabel, loading, initialStateAuth]);
 
-  const [form, handleInputChange, reset] = useForm(initialState);
-
+  const [form, handleInputChange, reset] = useForm(
+    user.isAuthenticated ? initialStateAuth : initialState
+  );
   const handleSubmit = (e) => {
     e.preventDefault();
     if (user.isAuthenticated) {
-      
-      form.plazo_en_meses=form.plazo_meses
-      delete form.plazo_meses
-      console.log(form);
-      dispacth(prestamoReducer(form, user.accessToken))
+      form.plazo_en_meses = form.plazo_meses;
+      delete form.plazo_meses;
+      dispacth(prestamoAction(form, user.accessToken));
     } else {
       dispacth(simuladorAction(form));
     }
@@ -77,7 +83,7 @@ const CalculadoraPrestamo = () => {
             />
           </ContainerInput>
           <Boton type="submit" onClick={handleSubmit}>
-            {btnLabel}
+            {btnlabel}
           </Boton>
         </Form>
       </div>

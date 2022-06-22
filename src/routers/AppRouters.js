@@ -27,12 +27,14 @@ const AppRouters = () => {
       displayName: user.displayName,
       ...userRegister[0],
     };
+    console.log(newDataUser);
     dispatch(loginSync(newDataUser));
   };
   useEffect(() => {
     if (loading) {
       onAuthStateChanged(auth, (user) => {
         if (user) {
+          
           getUserDataLogged(user).then(() => {
             setLoading(false);
           });
