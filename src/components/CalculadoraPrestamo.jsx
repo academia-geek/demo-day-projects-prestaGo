@@ -2,27 +2,49 @@ import React from "react";
 import { Form } from "react-bootstrap";
 import { AiFillDollarCircle } from "react-icons/ai";
 import { FaRegCalendarAlt } from "react-icons/fa";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useForm from "../hooks/useForm";
-import { simuladorAction } from "../redux/actions/Actions";
+import { prestamoReducer, simuladorAction } from "../redux/actions/Actions";
 import { ContainerInput, Icon, InputText } from "../styles/formStyled";
 import { Boton } from "../styles/loginStyled";
-
 const CalculadoraPrestamo = () => {
   const dispacth = useDispatch();
+  const user = useSelector((state) => state.auth);
+
   const initialState = {
     monto_prestar: 0,
     plazo_meses: "",
   };
+  let btnLabel;
+  if (user.isAuthenticated) {
+    btnLabel = "Solicitar Prestamo";
+    
+    Object.assign(initialState, {
+      nombre_completo: user.name,
+      fecha_creacion: Date.now(),
+      id_registro: user.id,
+    });
+
+  } else {
+    btnLabel = "Calcular Prestamo";
+  }
 
   const [form, handleInputChange, reset] = useForm(initialState);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispacth(simuladorAction(form));
+    if (user.isAuthenticated) {
+      
+      form.plazo_en_meses=form.plazo_meses
+      delete form.plazo_meses
+      console.log(form);
+      dispacth(prestamoReducer(form, user.accessToken))
+    } else {
+      dispacth(simuladorAction(form));
+    }
     reset();
   };
-  const {plazo_meses, monto_prestar } = form;
+  const { plazo_meses, monto_prestar } = form;
 
   return (
     <div>
@@ -55,7 +77,7 @@ const CalculadoraPrestamo = () => {
             />
           </ContainerInput>
           <Boton type="submit" onClick={handleSubmit}>
-            Calcular
+            {btnLabel}
           </Boton>
         </Form>
       </div>

@@ -9,6 +9,7 @@ import LandingPage from "../pages/LandingPage";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import { loginSync } from "../redux/actions/Actions";
+import { getDataUser } from "../services/register";
 import DashboarRouters from "./DashboarRouter";
 import { PrivateRouter } from "./PrivateRouter";
 import PublicRouter from "./PublicRouter";
@@ -17,12 +18,24 @@ const AppRouters = () => {
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(true);
   const user = useSelector((state) => state.auth);
+
+  const getUserDataLogged = async (user) => {
+    const dataUser = await getDataUser(user.accessToken);
+    const userRegister = dataUser.filter((item) => item.email === user?.email);
+    const newDataUser = {
+      accessToken: user.accessToken,
+      displayName: user.displayName,
+      ...userRegister[0],
+    };
+    dispatch(loginSync(newDataUser));
+  };
   useEffect(() => {
     if (loading) {
       onAuthStateChanged(auth, (user) => {
         if (user) {
-          dispatch(loginSync(user));
-          setLoading(false);
+          getUserDataLogged(user).then(() => {
+            setLoading(false);
+          });
         }
       });
     }
@@ -65,7 +78,7 @@ const AppRouters = () => {
             }
           />
         </Routes>
-        {user.isAuthenticated ? <></> :<Footer />}
+        {user.isAuthenticated ? <></> : <Footer />}
       </BrowserRouter>
     </div>
   );

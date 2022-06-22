@@ -7,7 +7,8 @@ export const RegisterTypes = {
   register: "register",
 };
 export const simuladorTypes = {
-  simulador: "simulador",
+  showSimulador: "show",
+  hideSimulador: "hide"
 };
 
 export const userTypes = {

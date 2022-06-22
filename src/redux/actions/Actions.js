@@ -3,12 +3,19 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import Swal from "sweetalert2";
 import { auth, google } from "../../firebase/FirebaseConfig";
+import { solicitarCredito } from "../../services/credito";
 import { register, getDataUser } from "../../services/register";
 import simular from "../../services/simulador";
-import { LoginTypes, RegisterTypes, simuladorTypes, userTypes } from "../types/Types";
+import {
+  LoginTypes,
+  RegisterTypes,
+  simuladorTypes,
+  userTypes,
+} from "../types/Types";
 
 export const loginAsync = (email, password) => {
   return async (dispatch) => {
@@ -16,7 +23,12 @@ export const loginAsync = (email, password) => {
       const user = await signInWithEmailAndPassword(auth, email, password);
       const dataUser = await getDataUser(user.accessToken);
       const userRegister = dataUser.filter((item) => item.email === email);
-      console.log(userRegister);
+      const newDataUser = {
+        accessToken: user.accessToken,
+        displayName: user.displayName,
+        ...userRegister[0],
+      };
+      console.log(newDataUser);
       dispatch(loginSync(user));
     } catch (error) {
       console.log(error);
@@ -25,10 +37,11 @@ export const loginAsync = (email, password) => {
 };
 
 export const loginSync = (user) => {
+  
   return {
     type: LoginTypes.login,
     payload: {
-      id: user.uid,
+      id: user.id,
       name: user.displayName || user.nombre_completo,
       accessToken: user.accessToken,
       rol: user.rol,
@@ -37,11 +50,13 @@ export const loginSync = (user) => {
   };
 };
 
+
 export const LoginGoogle = () => {
   return (dispatch) => {
     signInWithPopup(auth, google)
       .then(async ({ user }) => {
         const dataUser = await getDataUser(user.accessToken);
+
         const userRegister = dataUser.filter(
           (item) => item.email === user.email
         );
@@ -50,6 +65,7 @@ export const LoginGoogle = () => {
           displayName: user.displayName,
           ...userRegister[0],
         };
+        console.log(newDataUser);
         dispatch(loginSync(newDataUser));
       })
       .catch((e) => {
@@ -83,20 +99,43 @@ export const registerAction = (data) => {
         data.email,
         data.contrasena
       );
-      console.log(newUsr);
-      const result = await register(data);
 
-      Swal.fire({
-        position: "center",
-        text: `Registro Exitoso`,
-        icon: "success",
-        title: "Exitoso!!",
-        showConfirmButton: false,
-        timer: 1500,
-      });
-      dispatch({
-        type: RegisterTypes.register,
-        payload: result,
+      updateProfile(auth.currentUser, {
+        displayName: data.nombre_completo,
+      }).then(async () => {
+        console.log("Ya se actualizo el nombre en google");
+        const result = await register(data);
+        if (result){
+          const newDataUser = {
+            accessToken: newUsr.accessToken,
+            displayName: newUsr.displayName,
+            ...result,
+          };
+          console.log(newDataUser);
+  
+          Swal.fire({
+            position: "center",
+            text: `Registro Exitoso`,
+            icon: "success",
+            title: "Exitoso!!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+  
+          dispatch({
+            type: RegisterTypes.register,
+            payload: {
+              id: newDataUser.id,
+              name: newDataUser.displayName || newDataUser.nombre_completo,
+              accessToken: newDataUser.accessToken,
+              rol: newDataUser.rol,
+              isAuthenticated: true,
+            },
+          });
+        }else {
+          console.log("no se realizo registro en la api")
+        }
+        
       });
     } catch (error) {
       console.log(error);
@@ -112,16 +151,30 @@ export const registerAction = (data) => {
   };
 };
 
+export const hideSimuladorModal = () => {
+  return async (dispatch) => {
+    dispatch({
+      type: simuladorTypes.hideSimulador,
+      payload: {
+        showModalCalculo: false,
+      },
+    });
+  };
+};
 export const simuladorAction = (data) => {
   return async (dispatch) => {
     try {
       const result = await simular(data);
       console.log(result);
-      
+
       dispatch({
-        type: simuladorTypes.simulador,
+        type: simuladorTypes.showSimulador,
         payload: {
-          showModalCalculo:true
+          showModalCalculo: true,
+          simulacionData: {
+            intereses: result.intereses,
+            total: result.total,
+          },
         },
       });
     } catch (error) {
@@ -137,13 +190,23 @@ export const simuladorAction = (data) => {
   };
 };
 
-
-export const users = (token)=>{
-  return async (dispatch)=>{
+export const users = (token) => {
+  return async (dispatch) => {
     const dataUsers = await getDataUser(token);
     dispatch({
       type: userTypes.users,
-      payload: dataUsers
-    })
-  }
-}
+      payload: dataUsers,
+    });
+  };
+};
+
+export const prestamoReducer = (data, token) => {
+  return async (dispatch) => {
+    try {
+      const prestamo = await solicitarCredito(data, token);
+      console.log(prestamo);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};

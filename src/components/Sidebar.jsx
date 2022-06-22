@@ -60,7 +60,7 @@ const Sidebar = () => {
   const indicatorRef = useRef();
   const location = useLocation();
   const user = useSelector((state) => state.auth);
-  const [role, setRole] = useState("usuario");
+  const [role, setRole] = useState("");
 
   useEffect(() => {
     setTimeout(() => {
@@ -74,31 +74,16 @@ const Sidebar = () => {
     if (user) {
       setRole(user.rol);
     }
-    if (role && role !== "admin") {
-      sidebarNavItems = sidebarNavItems.filter((item)=>item.display !=="Usuarios")
-    }
+    
+
     const activeItem = sidebarNavItems.findIndex(
       (item) => item.section === curPath
     );
     setActiveIndex(curPath.length === 0 ? 0 : activeItem);
   }, [location, user, role]);
-  const menuSidebar = []
-  if(role){
-    sidebarNavItems.map((item, index) => {
-      menuSidebar.push(
-        <Link to={item.to} key={index}>
-              <div
-                className={`sidebar_menu_item ${
-                  activeIndex === index ? "active" : ""
-                }`}
-              >
-                <div className="sidebar_menu_item_icon">{item.icon}</div>
-                <div className="sidebar_menu_item_text">{item.display}</div>
-              </div>
-            </Link>
-      )
-      return item
-    })
+
+  if (role && role !== "admin") {
+    sidebarNavItems = sidebarNavItems.filter((item)=>item.display !=="Usuarios")
   }
   return (
     <div className="sidebar bg-primary">
