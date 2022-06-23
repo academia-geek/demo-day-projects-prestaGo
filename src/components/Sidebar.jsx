@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FaUser, FaHistory, FaUsers } from "react-icons/fa";
+import { FaHistory, FaUsers } from "react-icons/fa";
 import { AiFillHome, AiFillFileText } from "react-icons/ai";
 import { Link, useLocation } from "react-router-dom";
 import { BsFillCreditCard2BackFill } from "react-icons/bs";
