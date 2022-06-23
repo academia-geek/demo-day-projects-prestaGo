@@ -1,5 +1,6 @@
 import {
   LoginTypes,
+  prestamoTypes,
   RegisterTypes,
   simuladorTypes,
   userTypes,
@@ -52,6 +53,15 @@ export const simuladorReducer = (state = {}, action) => {
 export const usersReducer = (state = [], action) => {
   switch (action.type) {
     case userTypes.users:
+      return action.payload;
+    default:
+      return state;
+  }
+};
+
+export const prestamoReducer = (state = [], action) => {
+  switch (action.type) {
+    case prestamoTypes.prestamo:
       return action.payload;
     default:
       return state;

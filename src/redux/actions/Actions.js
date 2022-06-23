@@ -5,13 +5,15 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
+
 import Swal from "sweetalert2";
 import { auth, google } from "../../firebase/FirebaseConfig";
-import { solicitarCredito } from "../../services/credito";
+import { getDataCredito, solicitarCredito } from "../../services/credito";
 import { register, getDataUser } from "../../services/register";
 import simular from "../../services/simulador";
 import {
   LoginTypes,
+  prestamoTypes,
   RegisterTypes,
   simuladorTypes,
   userTypes,
@@ -55,18 +57,31 @@ export const LoginGoogle = () => {
   return (dispatch) => {
     signInWithPopup(auth, google)
       .then(async ({ user }) => {
+
         const dataUser = await getDataUser(user.accessToken);
+        console.log(`data user`)
+        console.log(dataUser)
+        console.log(`data user`)
+        console.log(`user`)
+        console.log(user)
+        console.log(`user`)
 
         const userRegister = dataUser.filter(
           (item) => item.email === user.email
         );
+        
+          /* if (userRegister.length === 0) {
+            const newUser = await register({
+              email: user.email,
+              nombre_completo: user.displayName,
+            });
+          } */
         const newDataUser = {
           accessToken: user.accessToken,
           displayName: user.displayName,
           ...userRegister[0],
         };
-        console.log(newDataUser);
-        dispatch(loginSync(newDataUser));
+        return loginSync(newDataUser);
       })
       .catch((e) => {
         Swal.fire({
@@ -232,3 +247,26 @@ export const prestamoAction = (data, token) => {
     }
   };
 };
+
+export const listPrestamoAction = (user) => {
+  return async (dispatch) => {
+    try {
+      const dataCredito = await getDataCredito (user.accessToken)
+      const listDataCredito = dataCredito.filter ((item) => item.id_registro === user.id)
+      if (listDataCredito.length > 0){
+        dispatch({
+          type:prestamoTypes.prestamo,
+          payload:listDataCredito,
+        })
+      }
+    } catch (error) {
+      Swal.fire({
+        position: "center",
+        text: `Ocurrio un error`,
+        icon: "error",
+        title: "Error",
+        showConfirmButton: true,
+      });
+    return listPrestamoAction
+  }
+}}

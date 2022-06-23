@@ -14,3 +14,7 @@ export const simuladorTypes = {
 export const userTypes = {
   users: "users",
 };
+
+export const prestamoTypes = {
+  prestamo: "prestamo list",
+};

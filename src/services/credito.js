@@ -19,3 +19,20 @@ export const solicitarCredito = async (data, token) => {
     console.log("error en catch", error);
   }
 };
+export const getDataCredito = async (token) => {
+  try {
+    const response = await axios.get(`${url}/api/prestamo`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.error) {
+      console.log("Ha ocurrido un error", response.error);
+    } else {
+      console.log(response.data);
+      return response.data;
+    }
+  } catch (error) {
+    console.log("error en catch", error);
+  }
+};

@@ -39,12 +39,6 @@ let sidebarNavItems = [
     section: "user",
   },
   {
-    display: "Perfil",
-    icon: <FaUser />,
-    to: "/dashboard/user",
-    section: "user",
-  },
-  {
     display: "Usuarios",
     icon: <FaUsers />,
     to: "/dashboard/users",
