@@ -52,5 +52,6 @@ export const ContainerFormRegister=styled.div`
     width: 500px;
     background-color: #00a8de;
     border-radius: 15px;
+    margin: 10px;
 
 `;

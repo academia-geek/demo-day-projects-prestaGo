@@ -7,6 +7,8 @@ export const Wrapper = styled.div`
   align-items: center;
   height: 100vh;
   padding: 0 20px;
+  flex-wrap: wrap;
+    height: auto;
 `;
 export const Formulario = styled.form`
   width: 100%;
