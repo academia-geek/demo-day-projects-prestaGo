@@ -20,12 +20,20 @@ prestaRouter.use((err: any|ExpressJoiError, _req: Request, res: Response, next: 
 
     }
 });
-prestaRouter.get("/mongo", decodeToken, async (_req: Request, res: Response) => {
+prestaRouter.get("/mongo/:id", async (req: Request, res: Response) => {
+    const id = req.params.id;
+    const simulator = await collections.user_no_register.find({}).toArray();
+    const position = simulator[parseFloat(id)]
+    const interes = 0.25;
+    let monto = position.monto_prestar;
+    let plazo = position.plazo_meses;
+    let total = monto * interes * parseFloat(plazo)
     try {
-        const user_no_register = await collections.user_no_register.find({}).toArray();
-        res.status(200).send(user_no_register);
+        return res.status(200).json(total)
+        
     } catch (error) {
         res.status(500).send(error.message);
+        
     }
 });
 

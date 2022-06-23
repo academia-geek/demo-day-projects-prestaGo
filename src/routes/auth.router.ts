@@ -6,18 +6,6 @@ export const authRouter = express.Router();
 
 authRouter.use(express.json());
 
-authRouter.get('/logIn', validator.body(authSchema), async (_req: Request, res: Response)=>{
-    try{
-        const { email, password } = _req.body;
-        const result = await auth.createUser(email,password);
-        res.status(201).send(result);
-
-    }catch(error){
-        res.status(500).send(error.message)
-
-    }
-});
-
 authRouter.post('/createUser', validator.body(authSchema), async (_req:Request, res: Response)=>{
     try{
         const { email, password } = _req.body;
