@@ -30,7 +30,7 @@ export const loginAsync = (email, password) => {
         displayName: user.displayName,
         ...userRegister[0],
       };
-      return loginSync(newDataUser)
+      return loginSync(newDataUser);
     } catch (error) {
       console.log(error);
     }
@@ -38,7 +38,7 @@ export const loginAsync = (email, password) => {
 };
 
 export const loginSync = (user) => {
-  return (dispatch)=>{
+  return (dispatch) => {
     dispatch({
       type: LoginTypes.login,
       payload: {
@@ -48,40 +48,46 @@ export const loginSync = (user) => {
         rol: user.rol,
         isAuthenticated: true,
       },
-    })
-  }
+    });
+  };
 };
-
 
 export const LoginGoogle = () => {
   return (dispatch) => {
     signInWithPopup(auth, google)
       .then(async ({ user }) => {
-
         const dataUser = await getDataUser(user.accessToken);
-        console.log(`data user`)
-        console.log(dataUser)
-        console.log(`data user`)
-        console.log(`user`)
-        console.log(user)
-        console.log(`user`)
+        console.log(`data user`);
+        console.log(dataUser);
+        console.log(`data user`);
+        console.log(`user`);
+        console.log(user);
+        console.log(`user`);
 
         const userRegister = dataUser.filter(
           (item) => item.email === user.email
         );
-        
-          /* if (userRegister.length === 0) {
-            const newUser = await register({
-              email: user.email,
-              nombre_completo: user.displayName,
-            });
-          } */
-        const newDataUser = {
-          accessToken: user.accessToken,
-          displayName: user.displayName,
-          ...userRegister[0],
-        };
-        return loginSync(newDataUser);
+
+        if (userRegister.length === 0) {
+          const newUser = await register({
+            email: user.email,
+            nombre_completo: user.displayName,
+          });
+
+          const newDataUser = {
+            accessToken: user.accessToken,
+            displayName: user.displayName,
+            ...newUser,
+          };
+          return loginSync(newDataUser);
+        } else {
+          const newDataUser = {
+            accessToken: user.accessToken,
+            displayName: user.displayName,
+            ...userRegister[0],
+          };
+          return loginSync(newDataUser);
+        }
       })
       .catch((e) => {
         Swal.fire({
@@ -120,14 +126,14 @@ export const registerAction = (data) => {
       }).then(async () => {
         console.log("Ya se actualizo el nombre en google");
         const result = await register(data);
-        if (result){
+        if (result) {
           const newDataUser = {
             accessToken: newUsr.accessToken,
             displayName: newUsr.displayName,
             ...result,
           };
           console.log(newDataUser);
-  
+
           Swal.fire({
             position: "center",
             text: `Registro Exitoso`,
@@ -136,7 +142,7 @@ export const registerAction = (data) => {
             showConfirmButton: false,
             timer: 1500,
           });
-  
+
           dispatch({
             type: RegisterTypes.register,
             payload: {
@@ -147,10 +153,9 @@ export const registerAction = (data) => {
               isAuthenticated: true,
             },
           });
-        }else {
-          console.log("no se realizo registro en la api")
+        } else {
+          console.log("no se realizo registro en la api");
         }
-        
       });
     } catch (error) {
       console.log(error);
@@ -218,12 +223,12 @@ export const users = (token) => {
 export const prestamoAction = (data, token) => {
   return async (dispatch) => {
     try {
-      console.log(`====`)
-      console.log(data)
-      console.log(`====`)
+      console.log(`====`);
+      console.log(data);
+      console.log(`====`);
       const prestamo = await solicitarCredito(data, token);
       console.log(prestamo);
-      if (prestamo){
+      if (prestamo) {
         Swal.fire({
           position: "center",
           text: `Prestamo Solicitado con Exitoso`,
@@ -241,7 +246,6 @@ export const prestamoAction = (data, token) => {
           showConfirmButton: true,
         });
       }
-      
     } catch (error) {
       console.log(error);
     }
@@ -251,13 +255,15 @@ export const prestamoAction = (data, token) => {
 export const listPrestamoAction = (user) => {
   return async (dispatch) => {
     try {
-      const dataCredito = await getDataCredito (user.accessToken)
-      const listDataCredito = dataCredito.filter ((item) => item.id_registro === user.id)
-      if (listDataCredito.length > 0){
+      const dataCredito = await getDataCredito(user.accessToken);
+      const listDataCredito = dataCredito.filter(
+        (item) => item.id_registro === user.id
+      );
+      if (listDataCredito.length > 0) {
         dispatch({
-          type:prestamoTypes.prestamo,
-          payload:listDataCredito,
-        })
+          type: prestamoTypes.prestamo,
+          payload: listDataCredito,
+        });
       }
     } catch (error) {
       Swal.fire({
@@ -267,6 +273,7 @@ export const listPrestamoAction = (user) => {
         title: "Error",
         showConfirmButton: true,
       });
-    return listPrestamoAction
-  }
-}}
+      return listPrestamoAction;
+    }
+  };
+};

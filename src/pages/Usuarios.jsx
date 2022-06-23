@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import TableList from "../components/TableList";
 import { users } from "../redux/actions/Actions";
+import {BiDotsVerticalRounded} from 'react-icons/bi'
 
 const buildDatalist = (list) => {
   return list.map((item) => {
@@ -15,6 +16,7 @@ const buildDatalist = (list) => {
       numero_celular: item.numero_celular,
       email: item.email,
       rol: item.rol,
+      acciones: <BiDotsVerticalRounded/>
     };
     item = data;
     return item;
