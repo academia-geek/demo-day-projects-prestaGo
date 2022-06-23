@@ -12,7 +12,7 @@ const LandingHeader = () => {
       <Header>
         <ContainerTitle>
           <TituloHeader>
-            <h1>PrestaGo</h1>
+            <h1 className="text-white">PrestaGo</h1>
           </TituloHeader>
           <SubtituloHeader>
             <p>Pide tu cupo de crédito en 15 minutos </p>
