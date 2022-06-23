@@ -15,7 +15,7 @@ import {
   FaCalendar,
   FaIdCard,
   FaHome,
-  FaBriefcase,
+  FaBriefcase,FaKey
 } from "react-icons/fa";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -310,7 +310,7 @@ const FormRegister = () => {
 
         <ContainerInput>
           <Icon>
-            <FaBriefcase color="gray" size={24} />
+            <FaKey color="gray" size={24} />
           </Icon>
           <InputText
             type="password"
